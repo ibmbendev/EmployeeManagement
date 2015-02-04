@@ -2,17 +2,20 @@
 
 This application is built for Employee management, which can be used for managing employee details.
 
-[View Demo](http://rajeshwarpatlolla.github.io/TimePickerForIonicFramework/demo/ "Demo") 
+[View Demo](http://rajeshwarpatlolla.github.io/EmployeeManagement/demo "Demo") 
 
 
+##Prerequisites
 
-##Follow the below mentioned steps.
+1) Node.js <br/>
+[Installation Instructions](http://nodejs.org/ "Installation Instructions")
 
-1) First, install Node.js.
+2) Bower  <br/>
+[Installation Instructions](http://bower.io/ "Installation Instructions")
 
-2) Install Bower
+3) Grunt  <br/>
+[Installation Instructions](http://gruntjs.com/ "Installation Instructions")
 
-3) Install Grunt
 
 ##Project Setup:
 
@@ -46,3 +49,8 @@ This application is built for Employee management, which can be used for managin
 ### 1) v1.0.0
 A sample Employee management application has built. 
 
+
+##Application Access:
+
+UserName : rajeshwar <br/>
+Password : rajeshwar
