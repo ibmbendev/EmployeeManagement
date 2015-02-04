@@ -12,10 +12,10 @@
     <div>
         <div class="input-group col-lg-4 searchBox pull-right">
             <input type="search" class="form-control" placeholder="Search employees.." ng-model="searchEmp"/>
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i>
-                        </button>
-                    </span>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </span>
         </div>
          <div class="col-lg-4 pull-right">
              <strong class="sortByText">Sort by</strong>
@@ -54,8 +54,8 @@
 
     <div class="clearfix"></div>
 
-    <div ng-repeat="x in employees  | filter:{name:searchEmp} | orderBy:empOrderBy" class="row">
-    <!--<div ng-repeat="x in employees  | filter:{name:searchEmp}" class="row">-->
+    <!--<div ng-repeat="x in employees  | filter:{name:searchEmp} | orderBy:empOrderBy" class="row">-->
+    <div ng-repeat="x in employees  | filter:{name:searchEmp}" class="row">
         <input type="checkbox" ng-show="showEmpCheckBoxes" class="col-sm-1 myRadioBtn"
                ng-click="markRecordsToDelete('employees',x)"/>
         <accordion close-others='oneAtATime' class="col-sm-{{empAccordion}}">
@@ -134,8 +134,8 @@
     </button>
     <div class="clearfix"></div>
 
-    <div ng-repeat="x in projects | filter:searchProj | orderBy:projOrderBy" class="row">
-    <!--<div ng-repeat="x in projects | filter:searchProj" class="row">-->
+    <!--<div ng-repeat="x in projects | filter:searchProj | orderBy:projOrderBy" class="row">-->
+    <div ng-repeat="x in projects | filter:searchProj" class="row">
         <input type="checkbox" ng-show="showProjCheckBoxes" class="col-sm-1 myRadioBtn"
                ng-click="markRecordsToDelete('projects',x)"/>
         <accordion close-others='oneAtATime' class="col-sm-{{projAccordion}}">
@@ -211,8 +211,8 @@
     </button>
     <div class="clearfix"></div>
 
-    <div ng-repeat="x in technologies | filter:searchTech | orderBy:techOrderBy" class="row">
-    <!--<div ng-repeat="x in technologies | filter:searchTech" class="row">-->
+    <!--<div ng-repeat="x in technologies | filter:searchTech | orderBy:techOrderBy" class="row">-->
+    <div ng-repeat="x in technologies | filter:searchTech" class="row">
         <input type="checkbox" ng-show="showTechCheckBoxes" class="col-sm-1 myRadioBtn"
                ng-click="markRecordsToDelete('technologies',x)"/>
         <accordion close-others='oneAtATime' class="col-sm-{{techAccordion}}">
