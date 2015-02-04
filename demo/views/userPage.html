@@ -1,256 +1,7 @@
-<div class="container" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-
-<div class="alert alert-{{alertClass}} alert-dismissible" role="alert" id="multiPurposeAlert">
-    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span
-            class="sr-only">Close</span></button>
-    <strong>{{alertClass | uppercase}}!</strong> {{alertText}}.
-</div>
-
-<tabset justified="true">
-<tab heading="Employees">
-
-    <div>
-        <div class="input-group col-lg-4 searchBox pull-right">
-            <input type="search" class="form-control" placeholder="Search employees.." ng-model="searchEmp"/>
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i>
-                        </button>
-                    </span>
-        </div>
-         <div class="col-lg-4 pull-right">
-             <strong class="sortByText">Sort by</strong>
-             <select ng-model="empOrderBy" class="styled-select sortList">
-                 <option value="name">Name</option>
-                 <option value="empid">Emp Id</option>
-                 <option value="designation">Designation</option>
-                 <option value="platform">Platform</option>
-                 <option value="email">Email</option>
-                 <option value="phone">Phone</option>
-                 <option value="dob">DOB</option>
-             </select>
-         </div>
-    </div>
-
-
-    <div class="clearfix"></div>
-    <button class="btn btn-sm btn-primary pull-right myBtn2" ng-click="addNewRecord('employees')"><i
-            class="glyphicon glyphicon-plus"></i>&nbsp; Add Employee
-    </button>
-    <button class="btn btn-sm btn-warning pull-right myBtn2"
-            ng-click="selectMultipleRecords('employees');toggleBtnEmp=!toggleBtnEmp;"
-            ng-show="!toggleBtnEmp">
-        <i class="glyphicon glyphicon-check"></i>&nbsp; Mark Employees
-    </button>
-    <button class="btn btn-sm btn-primary pull-right myBtn2"
-            ng-click="cancelMultipleRecords('employees');toggleBtnEmp=!toggleBtnEmp;"
-            ng-show="toggleBtnEmp">
-        <i class="glyphicon glyphicon-remove"></i>&nbsp; Cancel
-    </button>
-    <button class="btn btn-sm btn-danger pull-right myBtn2"
-            ng-click="deleteMultipleRecords('employees');toggleBtnEmp=!toggleBtnEmp;"
-            ng-show="toggleBtnEmp">
-        <i class="glyphicon glyphicon-trash"></i>&nbsp; Delete Marked
-    </button>
-
-    <div class="clearfix"></div>
-
-    <div ng-repeat="x in employees  | filter:{name:searchEmp} | orderBy:empOrderBy" class="row">
-    <!--<div ng-repeat="x in employees  | filter:{name:searchEmp}" class="row">-->
-        <input type="checkbox" ng-show="showEmpCheckBoxes" class="col-sm-1 myRadioBtn"
-               ng-click="markRecordsToDelete('employees',x)"/>
-        <accordion close-others='oneAtATime' class="col-sm-{{empAccordion}}">
-
-            <accordion-group is-open='status.open'>
-                <accordion-heading>{{$index + 1}}.&nbsp; {{x.name}}
-                    <i class='pull-right glyphicon' ng-class="{'glyphicon-minus-sign': status.open,
-                                        'glyphicon-plus-sign': !status.open}"></i>
-                </accordion-heading>
-
-                <div>
-                    <strong class="col-sm-6">Name </strong><i class="col-sm-6">{{x.name}}</i>
-                    <strong class="col-sm-6">Emp Id </strong><i class="col-sm-6">{{x.empid}}</i>
-                    <strong class="col-sm-6">Designation </strong><i class="col-sm-6">{{x.designation}}</i>
-                    <strong class="col-sm-6">Platform </strong><i class="col-sm-6">{{x.platform}}</i>
-                    <strong class="col-sm-6">Email </strong><i class="col-sm-6">{{x.email}}</i>
-                    <strong class="col-sm-6">Phone </strong><i class="col-sm-6">{{x.phone}}</i>
-                    <strong class="col-sm-6">DOB </strong><i class="col-sm-6">{{x.dob}}</i>
-
-                    <button class="btn btn-sm btn-danger pull-right myBtn"
-                            ng-click="deleteSingleRecord('employees',x)">
-                        <i class="glyphicon glyphicon-trash"></i>&nbsp; Delete
-                    </button>
-                    <button class="btn btn-sm btn-primary pull-right myBtn"
-                            ng-click="openEditModal('employees',$index)">
-                        <i class="glyphicon glyphicon-edit"></i>&nbsp; Edit
-                    </button>
-
-                </div>
-            </accordion-group>
-        </accordion>
-    </div>
-</tab>
-<tab heading="Projects">
-
-    <div>
-        <div class="col-lg-4 searchBox pull-right">
-            <div class="input-group">
-                <input type="search" class="form-control" placeholder="Search projects.."
-                       ng-model="searchProj"/>
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i>
-                        </button>
-                    </span>
-            </div>
-        </div>
-        <div class="col-lg-4 pull-right">
-            <strong class="sortByText">Sort by</strong>
-            <select ng-model="projOrderBy" class="styled-select sortList">
-                <option value="projects">Projects</option>
-                <option value="members">Members</option>
-                <option value="release">Release</option>
-                <option value="duration">Duration</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="clearfix"></div>
-    <button class="btn btn-sm btn-primary pull-right myBtn2" ng-click="addNewRecord('projects')"><i
-            class="glyphicon glyphicon-plus"></i>&nbsp; Add Project
-    </button>
-    <button class="btn btn-sm btn-warning pull-right myBtn2"
-            ng-click="selectMultipleRecords('projects');toggleBtnProj=!toggleBtnProj;"
-            ng-show="!toggleBtnProj">
-        <i class="glyphicon glyphicon-check"></i>&nbsp; Mark Projects
-    </button>
-    <button class="btn btn-sm btn-primary pull-right myBtn2"
-            ng-click="cancelMultipleRecords('projects');toggleBtnProj=!toggleBtnProj;"
-            ng-show="toggleBtnProj">
-        <i class="glyphicon glyphicon-remove"></i>&nbsp; Cancel
-    </button>
-    <button class="btn btn-sm btn-danger pull-right myBtn2"
-            ng-click="deleteMultipleRecords('projects');toggleBtnProj=!toggleBtnProj;"
-            ng-show="toggleBtnProj">
-        <i class="glyphicon glyphicon-trash"></i>&nbsp; Delete Marked
-    </button>
-    <div class="clearfix"></div>
-
-    <div ng-repeat="x in projects | filter:searchProj | orderBy:projOrderBy" class="row">
-    <!--<div ng-repeat="x in projects | filter:searchProj" class="row">-->
-        <input type="checkbox" ng-show="showProjCheckBoxes" class="col-sm-1 myRadioBtn"
-               ng-click="markRecordsToDelete('projects',x)"/>
-        <accordion close-others='oneAtATime' class="col-sm-{{projAccordion}}">
-
-            <accordion-group is-open='status.open'>
-                <accordion-heading>{{$index + 1}}.&nbsp; {{x.project}}
-                    <i class='pull-right glyphicon' ng-class="{'glyphicon-minus-sign': status.open,
-                                        'glyphicon-plus-sign': !status.open}"></i>
-                </accordion-heading>
-
-                <div>
-                    <strong class="col-sm-6">Project </strong><i class="col-sm-6">{{x.project}}</i>
-                    <strong class="col-sm-6">Members </strong><i class="col-sm-6">{{x.members}}</i>
-                    <strong class="col-sm-6">Release </strong><i class="col-sm-6">{{x.release}}</i>
-                    <strong class="col-sm-6">Duration </strong><i class="col-sm-6">{{x.duration}}</i>
-
-                    <button class="btn btn-sm btn-danger pull-right myBtn"
-                            ng-click="deleteSingleRecord('projects',x)">
-                        <i class="glyphicon glyphicon-trash"></i>&nbsp; Delete
-                    </button>
-                    <button class="btn btn-sm btn-primary pull-right myBtn"
-                            ng-click="openEditModal('projects',$index)">
-                        <i class="glyphicon glyphicon-edit"></i>&nbsp; Edit
-                    </button>
-
-                </div>
-            </accordion-group>
-        </accordion>
-    </div>
-</tab>
-<tab heading="Technologies">
-
-    <div>
-        <div class="col-lg-4 searchBox pull-right">
-            <div class="input-group">
-                <input type="search" class="form-control" placeholder="Search technologies.."
-                       ng-model="searchTech"/>
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i>
-                        </button>
-                    </span>
-            </div>
-        </div>
-        <div class="col-lg-4 pull-right">
-            <strong class="sortByText">Sort by</strong>
-            <select ng-model="techOrderBy" class="styled-select sortList">
-                <option value="technology">Technology</option>
-                <option value="version">Version</option>
-                <option value="duration">Duration</option>
-                <option value="usingin">Using In</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="clearfix"></div>
-    <button class="btn btn-sm btn-primary pull-right myBtn2" ng-click="addNewRecord('technologies')"><i
-            class="glyphicon glyphicon-plus"></i>&nbsp; Add Technology
-    </button>
-    <button class="btn btn-sm btn-warning pull-right myBtn2"
-            ng-click="selectMultipleRecords('technologies');toggleBtnTech=!toggleBtnTech;"
-            ng-show="!toggleBtnTech">
-        <i class="glyphicon glyphicon-check"></i>&nbsp; Mark Technologies
-    </button>
-    <button class="btn btn-sm btn-primary pull-right myBtn2"
-            ng-click="cancelMultipleRecords('technologies');toggleBtnTech=!toggleBtnTech;"
-            ng-show="toggleBtnTech">
-        <i class="glyphicon glyphicon-remove"></i>&nbsp; Cancel
-    </button>
-    <button class="btn btn-sm btn-danger pull-right myBtn2"
-            ng-click="deleteMultipleRecords('technologies');toggleBtnTech=!toggleBtnTech;"
-            ng-show="toggleBtnTech">
-        <i class="glyphicon glyphicon-trash"></i>&nbsp; Delete Marked
-    </button>
-    <div class="clearfix"></div>
-
-    <div ng-repeat="x in technologies | filter:searchTech | orderBy:techOrderBy" class="row">
-    <!--<div ng-repeat="x in technologies | filter:searchTech" class="row">-->
-        <input type="checkbox" ng-show="showTechCheckBoxes" class="col-sm-1 myRadioBtn"
-               ng-click="markRecordsToDelete('technologies',x)"/>
-        <accordion close-others='oneAtATime' class="col-sm-{{techAccordion}}">
-
-            <accordion-group is-open='status.open'>
-                <accordion-heading>{{$index + 1}}.&nbsp; {{x.technology}}
-                    <i class='pull-right glyphicon' ng-class="{'glyphicon-minus-sign': status.open,
-                                        'glyphicon-plus-sign': !status.open}"></i>
-                </accordion-heading>
-
-                <div>
-                    <strong class="col-sm-6">Technology </strong><i class="col-sm-6">{{x.technology}}</i>
-                    <strong class="col-sm-6">Version </strong><i class="col-sm-6">{{x.version}}</i>
-                    <strong class="col-sm-6">Duration </strong><i class="col-sm-6">{{x.duration}}</i>
-                    <strong class="col-sm-6">Using in </strong><i class="col-sm-6">{{x.usingin}}</i>
-
-                    <button class="btn btn-sm btn-danger pull-right myBtn"
-                            ng-click="deleteSingleRecord('technologies',x)">
-                        <i class="glyphicon glyphicon-trash"></i>&nbsp; Delete
-                    </button>
-                    <button class="btn btn-sm btn-primary pull-right myBtn"
-                            ng-click="openEditModal('technologies',$index)">
-                        <i class="glyphicon glyphicon-edit"></i>&nbsp; Edit
-                    </button>
-
-                </div>
-            </accordion-group>
-        </accordion>
-    </div>
-</tab>
-</tabset>
-</div>
-
-
-<!--Adding record START-->
-
-<script type="text/ng-template" id="addEmployeeTemplate.html">
-    <div class="panel panel-default addRecord">
+<div class="container" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"> <div class="alert alert-{{alertClass}} alert-dismissible" role="alert" id="multiPurposeAlert"> <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> <strong>{{alertClass | uppercase}}!</strong> {{alertText}}. </div> <tabset justified="true"> <tab heading="Employees"> <div> <div class="input-group col-lg-4 searchBox pull-right"> <input type="search" class="form-control" placeholder="Search employees.." ng-model="searchEmp"> <span class="input-group-btn"> <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i> </button> </span> </div> <div class="col-lg-4 pull-right"> <strong class="sortByText">Sort by</strong> <select ng-model="empOrderBy" class="styled-select sortList"> <option value="name">Name <option value="empid">Emp Id <option value="designation">Designation <option value="platform">Platform <option value="email">Email <option value="phone">Phone <option value="dob">DOB </select> </div> </div> <div class="clearfix"></div> <button class="btn btn-sm btn-primary pull-right myBtn2" ng-click="addNewRecord('employees')"><i class="glyphicon glyphicon-plus"></i>&nbsp; Add Employee </button> <button class="btn btn-sm btn-warning pull-right myBtn2" ng-click="selectMultipleRecords('employees');toggleBtnEmp=!toggleBtnEmp;" ng-show="!toggleBtnEmp"> <i class="glyphicon glyphicon-check"></i>&nbsp; Mark Employees </button> <button class="btn btn-sm btn-primary pull-right myBtn2" ng-click="cancelMultipleRecords('employees');toggleBtnEmp=!toggleBtnEmp;" ng-show="toggleBtnEmp"> <i class="glyphicon glyphicon-remove"></i>&nbsp; Cancel </button> <button class="btn btn-sm btn-danger pull-right myBtn2" ng-click="deleteMultipleRecords('employees');toggleBtnEmp=!toggleBtnEmp;" ng-show="toggleBtnEmp"> <i class="glyphicon glyphicon-trash"></i>&nbsp; Delete Marked </button> <div class="clearfix"></div> <!--<div ng-repeat="x in employees  | filter:{name:searchEmp} | orderBy:empOrderBy" class="row">--> <div ng-repeat="x in employees  | filter:{name:searchEmp}" class="row"> <input type="checkbox" ng-show="showEmpCheckBoxes" class="col-sm-1 myRadioBtn" ng-click="markRecordsToDelete('employees',x)"> <accordion close-others="oneAtATime" class="col-sm-{{empAccordion}}"> <accordion-group is-open="status.open"> <accordion-heading>{{$index + 1}}.&nbsp; {{x.name}} <i class="pull-right glyphicon" ng-class="{'glyphicon-minus-sign': status.open,
+                                        'glyphicon-plus-sign': !status.open}"></i> </accordion-heading> <div> <strong class="col-sm-6">Name </strong><i class="col-sm-6">{{x.name}}</i> <strong class="col-sm-6">Emp Id </strong><i class="col-sm-6">{{x.empid}}</i> <strong class="col-sm-6">Designation </strong><i class="col-sm-6">{{x.designation}}</i> <strong class="col-sm-6">Platform </strong><i class="col-sm-6">{{x.platform}}</i> <strong class="col-sm-6">Email </strong><i class="col-sm-6">{{x.email}}</i> <strong class="col-sm-6">Phone </strong><i class="col-sm-6">{{x.phone}}</i> <strong class="col-sm-6">DOB </strong><i class="col-sm-6">{{x.dob}}</i> <button class="btn btn-sm btn-danger pull-right myBtn" ng-click="deleteSingleRecord('employees',x)"> <i class="glyphicon glyphicon-trash"></i>&nbsp; Delete </button> <button class="btn btn-sm btn-primary pull-right myBtn" ng-click="openEditModal('employees',$index)"> <i class="glyphicon glyphicon-edit"></i>&nbsp; Edit </button> </div> </accordion-group> </accordion> </div> </tab> <tab heading="Projects"> <div> <div class="col-lg-4 searchBox pull-right"> <div class="input-group"> <input type="search" class="form-control" placeholder="Search projects.." ng-model="searchProj"> <span class="input-group-btn"> <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i> </button> </span> </div> </div> <div class="col-lg-4 pull-right"> <strong class="sortByText">Sort by</strong> <select ng-model="projOrderBy" class="styled-select sortList"> <option value="projects">Projects <option value="members">Members <option value="release">Release <option value="duration">Duration </select> </div> </div> <div class="clearfix"></div> <button class="btn btn-sm btn-primary pull-right myBtn2" ng-click="addNewRecord('projects')"><i class="glyphicon glyphicon-plus"></i>&nbsp; Add Project </button> <button class="btn btn-sm btn-warning pull-right myBtn2" ng-click="selectMultipleRecords('projects');toggleBtnProj=!toggleBtnProj;" ng-show="!toggleBtnProj"> <i class="glyphicon glyphicon-check"></i>&nbsp; Mark Projects </button> <button class="btn btn-sm btn-primary pull-right myBtn2" ng-click="cancelMultipleRecords('projects');toggleBtnProj=!toggleBtnProj;" ng-show="toggleBtnProj"> <i class="glyphicon glyphicon-remove"></i>&nbsp; Cancel </button> <button class="btn btn-sm btn-danger pull-right myBtn2" ng-click="deleteMultipleRecords('projects');toggleBtnProj=!toggleBtnProj;" ng-show="toggleBtnProj"> <i class="glyphicon glyphicon-trash"></i>&nbsp; Delete Marked </button> <div class="clearfix"></div> <!--<div ng-repeat="x in projects | filter:searchProj | orderBy:projOrderBy" class="row">--> <div ng-repeat="x in projects | filter:searchProj" class="row"> <input type="checkbox" ng-show="showProjCheckBoxes" class="col-sm-1 myRadioBtn" ng-click="markRecordsToDelete('projects',x)"> <accordion close-others="oneAtATime" class="col-sm-{{projAccordion}}"> <accordion-group is-open="status.open"> <accordion-heading>{{$index + 1}}.&nbsp; {{x.project}} <i class="pull-right glyphicon" ng-class="{'glyphicon-minus-sign': status.open,
+                                        'glyphicon-plus-sign': !status.open}"></i> </accordion-heading> <div> <strong class="col-sm-6">Project </strong><i class="col-sm-6">{{x.project}}</i> <strong class="col-sm-6">Members </strong><i class="col-sm-6">{{x.members}}</i> <strong class="col-sm-6">Release </strong><i class="col-sm-6">{{x.release}}</i> <strong class="col-sm-6">Duration </strong><i class="col-sm-6">{{x.duration}}</i> <button class="btn btn-sm btn-danger pull-right myBtn" ng-click="deleteSingleRecord('projects',x)"> <i class="glyphicon glyphicon-trash"></i>&nbsp; Delete </button> <button class="btn btn-sm btn-primary pull-right myBtn" ng-click="openEditModal('projects',$index)"> <i class="glyphicon glyphicon-edit"></i>&nbsp; Edit </button> </div> </accordion-group> </accordion> </div> </tab> <tab heading="Technologies"> <div> <div class="col-lg-4 searchBox pull-right"> <div class="input-group"> <input type="search" class="form-control" placeholder="Search technologies.." ng-model="searchTech"> <span class="input-group-btn"> <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i> </button> </span> </div> </div> <div class="col-lg-4 pull-right"> <strong class="sortByText">Sort by</strong> <select ng-model="techOrderBy" class="styled-select sortList"> <option value="technology">Technology <option value="version">Version <option value="duration">Duration <option value="usingin">Using In </select> </div> </div> <div class="clearfix"></div> <button class="btn btn-sm btn-primary pull-right myBtn2" ng-click="addNewRecord('technologies')"><i class="glyphicon glyphicon-plus"></i>&nbsp; Add Technology </button> <button class="btn btn-sm btn-warning pull-right myBtn2" ng-click="selectMultipleRecords('technologies');toggleBtnTech=!toggleBtnTech;" ng-show="!toggleBtnTech"> <i class="glyphicon glyphicon-check"></i>&nbsp; Mark Technologies </button> <button class="btn btn-sm btn-primary pull-right myBtn2" ng-click="cancelMultipleRecords('technologies');toggleBtnTech=!toggleBtnTech;" ng-show="toggleBtnTech"> <i class="glyphicon glyphicon-remove"></i>&nbsp; Cancel </button> <button class="btn btn-sm btn-danger pull-right myBtn2" ng-click="deleteMultipleRecords('technologies');toggleBtnTech=!toggleBtnTech;" ng-show="toggleBtnTech"> <i class="glyphicon glyphicon-trash"></i>&nbsp; Delete Marked </button> <div class="clearfix"></div> <!--<div ng-repeat="x in technologies | filter:searchTech | orderBy:techOrderBy" class="row">--> <div ng-repeat="x in technologies | filter:searchTech" class="row"> <input type="checkbox" ng-show="showTechCheckBoxes" class="col-sm-1 myRadioBtn" ng-click="markRecordsToDelete('technologies',x)"> <accordion close-others="oneAtATime" class="col-sm-{{techAccordion}}"> <accordion-group is-open="status.open"> <accordion-heading>{{$index + 1}}.&nbsp; {{x.technology}} <i class="pull-right glyphicon" ng-class="{'glyphicon-minus-sign': status.open,
+                                        'glyphicon-plus-sign': !status.open}"></i> </accordion-heading> <div> <strong class="col-sm-6">Technology </strong><i class="col-sm-6">{{x.technology}}</i> <strong class="col-sm-6">Version </strong><i class="col-sm-6">{{x.version}}</i> <strong class="col-sm-6">Duration </strong><i class="col-sm-6">{{x.duration}}</i> <strong class="col-sm-6">Using in </strong><i class="col-sm-6">{{x.usingin}}</i> <button class="btn btn-sm btn-danger pull-right myBtn" ng-click="deleteSingleRecord('technologies',x)"> <i class="glyphicon glyphicon-trash"></i>&nbsp; Delete </button> <button class="btn btn-sm btn-primary pull-right myBtn" ng-click="openEditModal('technologies',$index)"> <i class="glyphicon glyphicon-edit"></i>&nbsp; Edit </button> </div> </accordion-group> </accordion> </div> </tab> </tabset> </div> <!--Adding record START--> <script type="text/ng-template" id="addEmployeeTemplate.html"><div class="panel panel-default addRecord">
         <div class="panel-heading">
             <h3 class="panel-title">Add a new Employee record</h3>
         </div>
@@ -282,12 +33,7 @@
                 </button>
             </form>
         </div>
-    </div>
-</script>
-
-
-<script type="text/ng-template" id="addProjectTemplate.html">
-    <div class="panel panel-default addRecord">
+    </div></script> <script type="text/ng-template" id="addProjectTemplate.html"><div class="panel panel-default addRecord">
         <div class="panel-heading">
             <h3 class="panel-title">Add a new Project record</h3>
         </div>
@@ -313,12 +59,7 @@
                 </button>
             </form>
         </div>
-    </div>
-</script>
-
-
-<script type="text/ng-template" id="addTechnologyTemplate.html">
-    <div class="panel panel-default addRecord">
+    </div></script> <script type="text/ng-template" id="addTechnologyTemplate.html"><div class="panel panel-default addRecord">
         <div class="panel-heading">
             <h3 class="panel-title">Add a new Technology record</h3>
         </div>
@@ -344,16 +85,7 @@
                 </button>
             </form>
         </div>
-    </div>
-</script>
-
-<!--Adding record END-->
-
-
-<!--Updates / editing record START-->
-
-<script type="text/ng-template" id="editEmployeeTemplate.html">
-    <div class="modal-header">
+    </div></script> <!--Adding record END--> <!--Updates / editing record START--> <script type="text/ng-template" id="editEmployeeTemplate.html"><div class="modal-header">
         <h3 class="modal-title">Update the record.</h3>
     </div>
     <div class="updateModalBody">
@@ -390,12 +122,7 @@
         <button class="btn btn-warning" ng-click="discardUpdate()"><i class="glyphicon glyphicon-remove-circle"></i>
             Discard
         </button>
-    </div>
-</script>
-
-
-<script type="text/ng-template" id="editProjectTemplate.html">
-    <div class="modal-header">
+    </div></script> <script type="text/ng-template" id="editProjectTemplate.html"><div class="modal-header">
         <h3 class="modal-title">Update the record.</h3>
     </div>
     <div class="updateModalBody">
@@ -418,12 +145,7 @@
         <button class="btn btn-warning" ng-click="discardUpdate()"><i class="glyphicon glyphicon-remove-circle"></i>
             Discard
         </button>
-    </div>
-</script>
-
-
-<script type="text/ng-template" id="editTechnologyTemplate.html">
-    <div class="modal-header">
+    </div></script> <script type="text/ng-template" id="editTechnologyTemplate.html"><div class="modal-header">
         <h3 class="modal-title">Update the record.</h3>
     </div>
     <div class="updateModalBody">
@@ -446,15 +168,7 @@
         <button class="btn btn-warning" ng-click="discardUpdate()"><i class="glyphicon glyphicon-remove-circle"></i>
             Discard
         </button>
-    </div>
-</script>
-
-
-<!--Updates / editing record END-->
-
-
-<script type="text/ng-template" id="userAccountTemplate.html">
-    <div class="panel panel-default">
+    </div></script> <!--Updates / editing record END--> <script type="text/ng-template" id="userAccountTemplate.html"><div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">User Account</h3>
         </div>
@@ -466,12 +180,7 @@
                 </button>
             </a>
         </div>
-    </div>
-</script>
-
-
-<script type="text/ng-template" id="userSettingsTemplate.html">
-    <div class="panel panel-default">
+    </div></script> <script type="text/ng-template" id="userSettingsTemplate.html"><div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">Settings page.</h3>
         </div>
@@ -483,12 +192,7 @@
                 </button>
             </a>
         </div>
-    </div>
-</script>
-
-<script type="text/ng-template" id="userInfoTemplate.html">
-
-    <div class="panel panel-info">
+    </div></script> <script type="text/ng-template" id="userInfoTemplate.html"><div class="panel panel-info">
         <div class="panel-heading">
             <h3 class="panel-title">This page helps you</h3>
         </div>
@@ -518,6 +222,4 @@
                 </button>
             </a>
         </div>
-    </div>
-
-</script>
+    </div></script>
