@@ -4,6 +4,10 @@ This application is built for Employee management, which can be used for managin
 
 [View Demo](http://rajeshwarpatlolla.github.io/EmployeeManagement/demo "Demo") 
 
+##Application Access:
+
+UserName : rajeshwar <br/>
+Password : rajeshwar
 
 ##Prerequisites
 
@@ -49,8 +53,3 @@ This application is built for Employee management, which can be used for managin
 ### 1) v1.0.0
 A sample Employee management application has built. 
 
-
-##Application Access:
-
-UserName : rajeshwar <br/>
-Password : rajeshwar
