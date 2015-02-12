@@ -1,6 +1,6 @@
 ##Introduction:
 
-This application is built for Employee management, which can be used for managing employee details.
+This is  a small demo application for Employee Management, which can be used for managing employee details.
 
 [View Demo](http://rajeshwarpatlolla.github.io/EmployeeManagement/demo "Demo") 
 
